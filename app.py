@@ -14,7 +14,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Premium Cyberpunk UI Restyling
+# Premium Cyberpunk UI Restyling: Text Overrides Fixed, Slider Formats Protected
 st.markdown("""
     <style>
         /* Primary Workspace Canvas Background */
@@ -43,7 +43,7 @@ st.markdown("""
             background-color: #1e293b !important;
             border: 1px solid #334155 !important;
             border-radius: 12px !important;
-            padding: 16px !important; /* Slightly padded out to give wide text more room */
+            padding: 16px !important;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
         }
         
@@ -53,22 +53,17 @@ st.markdown("""
         .stCaption, 
         caption, 
         label, 
-        span, 
-        p, 
-        small,
         div[data-testid="stMarkdownContainer"] p {
             color: #ffffff !important;
         }
         
-        /* PREVENTS TEXT TRUNCATION (...): Forces long descriptions and graph captions to wrap fully */
+        /* TARGETED TEXT ONLY OVERRIDES: Prevents text truncation (...) while protecting slider internal flex layouts */
         div[data-testid="stMarkdownContainer"] p, 
         .stCaption, 
-        span, 
-        p, 
-        label {
+        caption {
             white-space: normal !important;
             word-wrap: break-word !important;
-            font-size: 0.85rem !important; /* Scaled down slightly for baseline text fields */
+            font-size: 0.85rem !important;
         }
         
         /* Metric Header Text Enhancements & Truncation Safe-Gates */
@@ -87,7 +82,7 @@ st.markdown("""
         }
         
         /* User Interaction Fields Input Borders */
-        div[data-baseweb="input"], div[data-baseweb="select"], .stSlider {
+        div[data-baseweb="input"], div[data-baseweb="select"] {
             background-color: #1e293b !important;
             border-color: #475569 !important;
             color: #ffffff !important;
