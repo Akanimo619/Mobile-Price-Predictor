@@ -1,5 +1,4 @@
 import streamlit as st
-import subprocess
 import time
 import requests
 import pandas as pd
@@ -70,22 +69,11 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --------------------------------------------------------
-# 2. RUNTIME PIPELINE INFRASTRUCTURE BOOTSTRAP (MLOPS)
+# 2. RUNTIME PIPELINE INFRASTRUCTURE BRIDGE
 # --------------------------------------------------------
-@st.cache_resource
-def launch_isolated_inference_microservice():
-    """Fires up your unchanged FastAPI model server detached worker routine silently behind the scene."""
-    process = subprocess.Popen(
-        ["uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8000"],
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL
-    )
-    time.sleep(3.5)  # Let server register model parameters cleanly inside memory array block
-    return process
-
-# Initialize internal engine bridge to your unchanged main.py
-backend_worker = launch_isolated_inference_microservice()
-BACKEND_URL = "http://127.0.0.1:8000"
+# LOCAL TESTING: Keep this as "http://127.0.0.1:8000" while testing locally on your PC.
+# CLOUD PRODUCTION: Replace this string with your live Render or Railway URL once deployed!
+BACKEND_URL = "https://mobile-inference-api.onrender.com"
 
 # --------------------------------------------------------
 # 3. INTERACTIVE CONSOLE FRAMEWORK INTERFACE
@@ -108,27 +96,27 @@ fire_prediction = st.sidebar.button("🔮 INITIALIZE INFERENCE RESOLUTION")
 
 # Header dashboard matrix section
 st.title("⚡ AI/ML Enterprise Inference Suite")
-st.caption("Live Containerized Model Architecture Operations Console • Cluster: HF-Spaces-Runtime")
+st.caption("Live Decoupled Architecture Analytics Console • Frontend: Streamlit Cloud")
 
 # System telemetry metrics panel row
 m_col1, m_col2, m_col3, m_col4 = st.columns(4)
 
 with m_col1:
-    st.metric(label="Runtime Node Status", value="OPERATIONAL", delta="Active Daemon")
+    st.metric(label="Runtime Node Status", value="OPERATIONAL", delta="Active Dashboard")
 with m_col2:
-    st.metric(label="Cluster Active Node Thread", value="HF-Cluster-Node-01")
+    st.metric(label="Cluster Active Node Thread", value="AWS-EC2-Compute-Node")
 with m_col3:
     st.metric(label="Algorithmic Sub-Pipeline", value="Random Forest Ensemble")
 with m_col4:
     try:
         health_req = requests.get(f"{BACKEND_URL}/", timeout=1.5)
-        # Matches your exact root index return format
+        # Matches your exact root index return format from main.py
         if health_req.status_code == 200 and "message" in health_req.json():
             gateway_state = "200 ONLINE"
         else:
             gateway_state = "PORT STALLED"
     except Exception:
-        gateway_state = "EVALUATING Payloads"
+        gateway_state = "Awaiting Connection Loop"
     st.metric(label="Internal Micro-Gateway Link", value=gateway_state)
 
 st.markdown("---")
