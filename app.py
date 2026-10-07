@@ -220,14 +220,18 @@ with analytics_pane:
         "Validation Accuracy Trace": accuracy_growth
     }, index=chart_time_index)
     
-    # Streamlit Core Multi-Line Optimization Area Chart
+    # 1. Streamlit Core Multi-Line Optimization Area Chart
+    st.area_chart(telemetry_df, use_container_width=True)
+
+    # 2. Lower Analytics split matrix charts sub-level block row
     s_col1, s_col2 = st.columns(2)
     with s_col1:
         st.markdown("Feature Quantization Weight Distribution Matrix", unsafe_allow_html=True)
-        bar_dataframe = pd.DataFrame({
+        bar_df = pd.DataFrame({
             'Weights Coefficient Allocation': [0.55, 0.23, 0.13, 0.09]
         }, index=['RAM Capacity Vector', 'Battery Core Cell', 'Pixel Width Matrix', 'Pixel Height Matrix'])
         st.bar_chart(bar_df, use_container_width=True)
+
     with s_col2:
         st.markdown("Inference Response Latency Footprints Track (ms)", unsafe_allow_html=True)
         latency_noise = pd.DataFrame(
