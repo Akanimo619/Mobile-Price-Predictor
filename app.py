@@ -14,7 +14,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Premium Cyberpunk UI Restyling: All Dimmed Grey Font Fields Overridden to High-Contrast Crisp White
+# Premium Cyberpunk UI Restyling
 st.markdown("""
     <style>
         /* Primary Workspace Canvas Background */
@@ -43,7 +43,7 @@ st.markdown("""
             background-color: #1e293b !important;
             border: 1px solid #334155 !important;
             border-radius: 12px !important;
-            padding: 20px !important;
+            padding: 16px !important; /* Slightly padded out to give wide text more room */
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
         }
         
@@ -60,17 +60,30 @@ st.markdown("""
             color: #ffffff !important;
         }
         
-        /* Metric Header Text Enhancements */
+        /* PREVENTS TEXT TRUNCATION (...): Forces long descriptions and graph captions to wrap fully */
+        div[data-testid="stMarkdownContainer"] p, 
+        .stCaption, 
+        span, 
+        p, 
+        label {
+            white-space: normal !important;
+            word-wrap: break-word !important;
+            font-size: 0.85rem !important; /* Scaled down slightly for baseline text fields */
+        }
+        
+        /* Metric Header Text Enhancements & Truncation Safe-Gates */
         .stMetric label {
             color: #38bdf8 !important; /* Emphasized Neon Accent Secondary Color */
-            font-size: 0.85rem !important;
+            font-size: 0.72rem !important; /* Scaled down precisely to make long wording fit without trailing ... */
             text-transform: uppercase !important;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.05em;
             font-weight: 700 !important;
+            white-space: normal !important; /* Forces multi-word headers to stack elegantly if narrow */
         }
         .stMetric div[data-testid="stMetricValue"] {
             color: #ffffff !important;
             font-weight: 800 !important;
+            font-size: 1.8rem !important; /* Scaled cleanly to prevent value truncation */
         }
         
         /* User Interaction Fields Input Borders */
@@ -101,6 +114,7 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
+
 
 # --------------------------------------------------------
 # 2. RUNTIME PIPELINE INFRASTRUCTURE BRIDGE
