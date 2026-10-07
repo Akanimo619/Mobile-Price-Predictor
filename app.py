@@ -106,7 +106,7 @@ st.markdown("""
 # 2. RUNTIME PIPELINE INFRASTRUCTURE BRIDGE
 # --------------------------------------------------------
 # Points to your live running FastAPI container on Render
-BACKEND_URL = "https://onrender.com"
+BACKEND_URL = "https://mobile-inference-api.onrender.com"
 
 # --------------------------------------------------------
 # 3. INTERACTIVE CONSOLE FRAMEWORK INTERFACE
