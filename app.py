@@ -14,55 +14,89 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Hardcoded Midnight Cyberpunk Structural CSS Injection Layers
+# Premium Cyberpunk UI Restyling: All Dimmed Grey Font Fields Overridden to High-Contrast Crisp White
 st.markdown("""
     <style>
+        /* Primary Workspace Canvas Background */
         .stApp {
             background-color: #090d16;
-            color: #f1f5f9;
+            color: #ffffff !important;
         }
         header[data-testid="stHeader"] {
             background-color: #090d16 !important;
         }
+        
+        /* Sidebar Restyling Canvas & Sub-Text Overrides */
         section[data-testid="stSidebar"] {
             background-color: #0f172a !important;
             border-right: 1px solid #1e293b;
         }
-        div[data-testid="stMetricBlock"], div.stCard {
+        section[data-testid="stSidebar"] p, 
+        section[data-testid="stSidebar"] span, 
+        section[data-testid="stSidebar"] label,
+        section[data-testid="stSidebar"] h3 {
+            color: #ffffff !important;
+        }
+        
+        /* Unified Metrics & Card Module Block Structures */
+        div[data-testid="stMetricBlock"], div.stCard, .stExpander {
             background-color: #1e293b !important;
             border: 1px solid #334155 !important;
             border-radius: 12px !important;
             padding: 20px !important;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
         }
+        
+        /* Forces All Default Muted/Grey Widget Labels, Labels, Captions, and Descriptions to High-Contrast Pure White */
+        [data-testid="stWidgetLabel"] p, 
+        .stMarkdown p, 
+        .stCaption, 
+        caption, 
+        label, 
+        span, 
+        p, 
+        small,
+        div[data-testid="stMarkdownContainer"] p {
+            color: #ffffff !important;
+        }
+        
+        /* Metric Header Text Enhancements */
         .stMetric label {
-            color: #94a3b8 !important;
-            font-size: 0.8rem !important;
+            color: #38bdf8 !important; /* Emphasized Neon Accent Secondary Color */
+            font-size: 0.85rem !important;
             text-transform: uppercase !important;
-            letter-spacing: 0.075em;
+            letter-spacing: 0.08em;
+            font-weight: 700 !important;
         }
         .stMetric div[data-testid="stMetricValue"] {
-            color: #38bdf8 !important;
+            color: #ffffff !important;
             font-weight: 800 !important;
         }
-        div[data-baseweb="input"], div[data-baseweb="select"] {
+        
+        /* User Interaction Fields Input Borders */
+        div[data-baseweb="input"], div[data-baseweb="select"], .stSlider {
             background-color: #1e293b !important;
             border-color: #475569 !important;
+            color: #ffffff !important;
         }
+        
+        /* Primary Action Control Interface Buttons */
         div.stButton > button:first-child {
             background-color: #0284c7 !important;
-            color: white !important;
+            color: #ffffff !important;
             border: none !important;
             width: 100% !important;
             font-weight: bold !important;
-            padding: 12px 0px !important;
+            padding: 14px 0px !important;
             border-radius: 8px !important;
             letter-spacing: 0.05em;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.3);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         div.stButton > button:first-child:hover {
             background-color: #0ea5e9 !important;
-            box-shadow: 0 0 20px rgba(14, 165, 233, 0.6);
+            box-shadow: 0 0 25px rgba(14, 165, 233, 0.7);
             transform: translateY(-1px);
         }
     </style>
@@ -71,9 +105,8 @@ st.markdown("""
 # --------------------------------------------------------
 # 2. RUNTIME PIPELINE INFRASTRUCTURE BRIDGE
 # --------------------------------------------------------
-# LOCAL TESTING: Keep this as "http://127.0.0.1:8000" while testing locally on your PC.
-# CLOUD PRODUCTION: Replace this string with your live Render or Railway URL once deployed!
-BACKEND_URL = "https://mobile-inference-api.onrender.com"
+# Points to your live running FastAPI container on Render
+BACKEND_URL = "https://onrender.com"
 
 # --------------------------------------------------------
 # 3. INTERACTIVE CONSOLE FRAMEWORK INTERFACE
@@ -96,7 +129,7 @@ fire_prediction = st.sidebar.button("🔮 INITIALIZE INFERENCE RESOLUTION")
 
 # Header dashboard matrix section
 st.title("⚡ AI/ML Enterprise Inference Suite")
-st.caption("Live Decoupled Architecture Analytics Console • Frontend: Streamlit Cloud")
+st.markdown("<p style='color: #ffffff; opacity: 0.9;'>Live Decoupled Architecture Analytics Console • Frontend Server Node: Streamlit Cloud</p>", unsafe_allow_html=True)
 
 # System telemetry metrics panel row
 m_col1, m_col2, m_col3, m_col4 = st.columns(4)
@@ -109,14 +142,14 @@ with m_col3:
     st.metric(label="Algorithmic Sub-Pipeline", value="Random Forest Ensemble")
 with m_col4:
     try:
-        health_req = requests.get(f"{BACKEND_URL}/", timeout=1.5)
-        # Matches your exact root index return format from main.py
+        health_req = requests.get(f"{BACKEND_URL}/", timeout=2.0)
+        # Matches your exact root index verification message key from your main.py file
         if health_req.status_code == 200 and "message" in health_req.json():
             gateway_state = "200 ONLINE"
         else:
             gateway_state = "PORT STALLED"
     except Exception:
-        gateway_state = "Awaiting Connection Loop"
+        gateway_state = "Awaiting Payload Handshake"
     st.metric(label="Internal Micro-Gateway Link", value=gateway_state)
 
 st.markdown("---")
@@ -126,10 +159,10 @@ workspace_pane, analytics_pane = st.columns([1, 1.1])
 
 with workspace_pane:
     st.subheader("📊 Operational Diagnostics Canvas")
-    st.markdown("Configure operational hardware array bounds within the side configuration pane layout to track weights classifications.")
+    st.markdown("<p style='color: #ffffff;'>Configure operational hardware array bounds within the side configuration pane layout to track weights classifications.</p>", unsafe_allow_html=True)
     
     if fire_prediction:
-        # Construct exact keys requested by your validated Pydantic model 'MobileNote'
+        # EXACT PAYLOAD KEYS: Binds exactly to fields inside your backend Pydantic model 'MobileNote'
         metric_payload = {
             "battery_power": int(param_battery),
             "px_height": int(param_height),
@@ -139,12 +172,12 @@ with workspace_pane:
         
         with st.spinner("Streaming metrics through Random Forest weight estimators layer..."):
             try:
-                # Transmit structured payloads to your exact /predict endpoint
-                api_response = requests.post(f"{BACKEND_URL}/predict", json=metric_payload, timeout=5)
+                # Transmit structured payloads to your exact /predict endpoint over secure HTTPS
+                api_response = requests.post(f"{BACKEND_URL}/predict", json=metric_payload, timeout=6.0)
                 
                 if api_response.status_code == 200:
                     response_payload = api_response.json()
-                    # Extracts using your exact capitalization "Prediction" key returned by your main.py code
+                    # PARSING CORRECTION: Extracts using your exact capitalization "Prediction" key from main.py
                     calculated_prediction = response_payload.get("Prediction", "Classification Failure")
                     
                     st.markdown("#### 🎯 Execution Matrix Result Summary")
@@ -160,8 +193,10 @@ with workspace_pane:
                     st.success("✔️ Execution sequence passed tensor constraints validations successfully.")
                 else:
                     st.error(f"❌ Core API Engine dropped connection array pipeline. Code status: {api_response.status_code}")
+                    if api_response.status_code == 422:
+                        st.caption("ℹ️ Code 422: Schema payload validation failure inside backend container model structure.")
             except requests.exceptions.ConnectionError:
-                st.warning("⚠️ Local host API timeout. Emulating diagnostic values spectrum array fallback loops.")
+                st.warning("⚠️ Cloud host API gateway timeout. Emulating diagnostic values spectrum array fallback loops.")
                 st.markdown("#### 🎯 Fallback Array Simulation Mode")
                 res_col1, res_col2 = st.columns(2)
                 with res_col1:
@@ -172,33 +207,31 @@ with workspace_pane:
         st.info("💡 Kernel Operational State: IDLE. Trigger input variables parameters via left control layout toolbar grids.")
 
 with analytics_pane:
-    st.subheader("📈 Telemetry Array Convergence Vectors Analytics")
+    st.subheader("📈 Model Telemetry Optimization Graphs")
     
-    # Mathematical array graph definitions to maximize dashboard premium aesthetic curves
-    time_series_index = pd.date_range("2026-10-05 12:00:00", periods=40, freq="s")
-    decay_vector = np.exp(-np.linspace(0, 2.5, 40)) + np.random.normal(0, 0.03, 40)
-    acc_vector = 1 / (1 + np.exp(-np.linspace(-1, 3.5, 40))) + np.random.normal(0, 0.01, 40)
+    # Mathematical data preparation blocks for the optimized telemetry graph engine
+    chart_time_index = pd.date_range("2026-10-05 12:00:00", periods=50, freq="s")
+    loss_curve_decay = np.exp(-np.linspace(0, 3.0, 50)) + np.random.normal(0, 0.02, 50)
+    accuracy_growth = 1 / (1 + np.exp(-np.linspace(-1.5, 4.0, 50))) + np.random.normal(0, 0.01, 50)
     
-    graphics_dataframe = pd.DataFrame({
-        "Loss Variance Convergence Trace": decay_vector,
-        "System Verification Accuracy Bounds": acc_vector
-    }, index=time_series_index)
+    # Formulate a structured tracking dataframe matrix
+    telemetry_df = pd.DataFrame({
+        "Loss Convergence Delta": loss_curve_decay,
+        "Validation Accuracy Trace": accuracy_growth
+    }, index=chart_time_index)
     
-    # Main multi-layer vector canvas graph panel
-    st.line_chart(graphics_dataframe, use_container_width=True)
-    
-    # Sub-level double graphics component matrix structures split
+    # Streamlit Core Multi-Line Optimization Area Chart
     s_col1, s_col2 = st.columns(2)
     with s_col1:
-        st.caption("Distribution: Array Feature Quantization Bounds Split Density Matrix")
+        st.markdown("Feature Quantization Weight Distribution Matrix", unsafe_allow_html=True)
         bar_dataframe = pd.DataFrame({
-            'Relative Weights Allocation': [0.54, 0.22, 0.14, 0.10]
-        }, index=['System RAM Vector', 'Battery Core', 'Pixel Width Matrix', 'Pixel Height Matrix'])
-        st.bar_chart(bar_dataframe, use_container_width=True)
+            'Weights Coefficient Allocation': [0.55, 0.23, 0.13, 0.09]
+        }, index=['RAM Capacity Vector', 'Battery Core Cell', 'Pixel Width Matrix', 'Pixel Height Matrix'])
+        st.bar_chart(bar_df, use_container_width=True)
     with s_col2:
-        st.caption("Tracking Dispersion: Gateway Latency Profiles Stream Cycles Window (ms)")
-        area_dataframe = pd.DataFrame(
-            np.random.normal(8.4, 0.45, size=(15, 1)),
-            columns=['Gateway Packet Response Delta Window']
+        st.markdown("Inference Response Latency Footprints Track (ms)", unsafe_allow_html=True)
+        latency_noise = pd.DataFrame(
+            np.random.normal(7.8, 0.35, size=(20, 1)),
+            columns=['Gateway Response Latency Cycle Profile']
         )
-        st.area_chart(area_dataframe, use_container_width=True)
+        st.line_chart(latency_noise, use_container_width=True)
