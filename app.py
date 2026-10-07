@@ -14,7 +14,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Premium Cyberpunk UI Restyling: Text Overrides Fixed, Slider Formats Protected
+# Premium Cyberpunk UI Restyling
 st.markdown("""
     <style>
         /* Primary Workspace Canvas Background */
@@ -31,10 +31,9 @@ st.markdown("""
             background-color: #0f172a !important;
             border-right: 1px solid #1e293b;
         }
-        section[data-testid="stSidebar"] p, 
-        section[data-testid="stSidebar"] span, 
-        section[data-testid="stSidebar"] label,
-        section[data-testid="stSidebar"] h3 {
+        section[data-testid="stSidebar"] h3, 
+        section[data-testid="stSidebar"] h5,
+        section[data-testid="stSidebar"] p {
             color: #ffffff !important;
         }
         
@@ -47,17 +46,33 @@ st.markdown("""
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
         }
         
-        /* Forces All Default Muted/Grey Widget Labels, Labels, Captions, and Descriptions to High-Contrast Pure White */
+        /* Forces Main Labels and Captions to High-Contrast Pure White */
         [data-testid="stWidgetLabel"] p, 
         .stMarkdown p, 
         .stCaption, 
         caption, 
-        label, 
         div[data-testid="stMarkdownContainer"] p {
             color: #ffffff !important;
         }
         
-        /* TARGETED TEXT ONLY OVERRIDES: Prevents text truncation (...) while protecting slider internal flex layouts */
+        /* CRUCIAL FIX FOR SLIDERS: Restores horizontal structure to BaseWeb internal elements */
+        div[data-testid="stSlider"] div {
+            display: flex !important;
+            flex-direction: row !important;
+        }
+        div[data-testid="stSlider"] [data-testid="stWidgetLabel"] {
+            display: block !important;
+            width: 100% !important;
+        }
+        /* Fixes individual tick bounds text rows */
+        div[role="slider"] ~ div {
+            display: flex !important;
+            justify-content: space-between !important;
+            flex-direction: row !important;
+            width: 100% !important;
+        }
+        
+        /* TARGETED TEXT ONLY OVERRIDES: Prevents text truncation (...) */
         div[data-testid="stMarkdownContainer"] p, 
         .stCaption, 
         caption {
@@ -69,16 +84,16 @@ st.markdown("""
         /* Metric Header Text Enhancements & Truncation Safe-Gates */
         .stMetric label {
             color: #38bdf8 !important; /* Emphasized Neon Accent Secondary Color */
-            font-size: 0.72rem !important; /* Scaled down precisely to make long wording fit without trailing ... */
+            font-size: 0.72rem !important; 
             text-transform: uppercase !important;
             letter-spacing: 0.05em;
             font-weight: 700 !important;
-            white-space: normal !important; /* Forces multi-word headers to stack elegantly if narrow */
+            white-space: normal !important; 
         }
         .stMetric div[data-testid="stMetricValue"] {
             color: #ffffff !important;
             font-weight: 800 !important;
-            font-size: 1.8rem !important; /* Scaled cleanly to prevent value truncation */
+            font-size: 1.8rem !important; 
         }
         
         /* User Interaction Fields Input Borders */
@@ -109,7 +124,6 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
-
 
 
 # --------------------------------------------------------
