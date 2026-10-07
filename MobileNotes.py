@@ -5,4 +5,3 @@ class MobileNote(BaseModel):
     px_height: int
     px_width: int
     ram: int
-    price_range: int
